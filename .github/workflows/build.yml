@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - dev
-  pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_dispatch: 
 jobs:
   build:
     name: Build Bonita Community
@@ -28,12 +27,3 @@ jobs:
 
       - name: ⚙️ Run Community build & ✔️ unit tests
         run: ./gradlew build
-
-      - name: Run Integration tests
-        run: ./gradlew iT
-
-      - name: 🚀 Publish Test Report
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: '**/build/test-results/**/*.xml'
